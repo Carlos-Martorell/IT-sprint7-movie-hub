@@ -90,21 +90,15 @@
           "builder": "@angular/build:extract-i18n"
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "tsConfig": "<rootDir>/tsconfig.spec.json"
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "d09885da-ddcc-428e-b7cc-a1b0a9321447"
   }
 }
