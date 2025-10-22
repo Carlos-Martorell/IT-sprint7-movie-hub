@@ -1,0 +1,23 @@
+<main>
+  <h1>Películas Populares</h1>
+
+  @if (loading()) {
+    <p>Cargando películas...</p>
+  }
+
+  @if (!loading() && movies().length > 0) {
+    <ul>
+      @for (movie of movies(); track movie.id) {
+        <li>
+          <h2>{{ movie.title }}</h2>
+          <p>Fecha: {{ movie.release_date }}</p>
+          <p>Valoración: {{ movie.vote_average }}</p>
+        </li>
+      }
+    </ul>
+  }
+
+  @if (!loading() && movies().length === 0) {
+    <p>No se encontraron películas</p>
+  }
+</main>

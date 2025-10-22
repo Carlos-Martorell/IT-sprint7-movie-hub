@@ -8,5 +8,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('IT-sprint9-movie-hub');
+  protected readonly title = signal('IT-sprint7-movie-hub');
 }
