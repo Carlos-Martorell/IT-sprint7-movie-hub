@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { MovieListComponent } from './src/app/features/movies/pages/movie-list/movie-list';
+import { MovieListComponent } from './features/movies/movie-list/movie-list';
 
 export const routes: Routes = [
   {

@@ -15,13 +15,8 @@ import { MovieService } from '@core/services/movies';
 export class MovieListComponent implements OnInit {
   private readonly movieService = inject(MovieService);
 
-  // Signal para almacenar las películas
   movies = signal<Movie[]>([]);
-
-  // Signal para saber si está cargando
   loading = signal<boolean>(true);
-
-  // Signal para página actual
   currentPage = signal<number>(1);
 
 
