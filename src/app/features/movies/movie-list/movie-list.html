@@ -10,7 +10,9 @@
   @if (!loading() && movies().length > 0) {
     <ul class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6 list-none p-0">
       @for (movie of movies(); track movie.id) {
-        <li class="bg-slate-800 rounded-lg p-4 shadow-lg transition-transform hover:-translate-y-1">
+        <li
+        (click)="goToDetail(movie.id)"
+        class="bg-slate-800 rounded-lg p-4 shadow-lg transition-transform hover:-translate-y-1 cursor-pointer">
           <img
             [src]="getImageUrl(movie.poster_path)"
             [alt]="movie.title"

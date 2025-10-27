@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '@app/core/services/movies';
+import { MovieDetail } from '@app/core/models/movie-detail';
 
 @Component({
   selector: 'app-movie-detail',
@@ -9,7 +10,7 @@ import { MovieService } from '@app/core/services/movies';
   templateUrl: './movie-detail.html',
   styleUrl: './movie-detail.css'
 })
-export class MovieDetail implements OnInit {
+export class MovieDetailComponent implements OnInit {
 
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
@@ -57,5 +58,6 @@ getImageUrl(path: string | null, size: string = 'w500'): string {
   }
   return `https://image.tmdb.org/t/p/${size}${path}`;
 }
+
 
 }

@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Movie } from '@core/models/movie';
 import { MovieService } from '@core/services/movies';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { MovieService } from '@core/services/movies';
 })
 export class MovieListComponent implements OnInit {
   private readonly movieService = inject(MovieService);
-
+  private readonly router = inject(Router);
   movies = signal<Movie[]>([]);
   loading = signal<boolean>(true);
   currentPage = signal<number>(1);
@@ -45,6 +46,10 @@ export class MovieListComponent implements OnInit {
       return 'https://via.placeholder.com/500x750?text=Sin+imagen';
     }
     return `https://image.tmdb.org/t/p/w500${posterPath}`;
+  }
+
+  goToDetail(movieId: number): void {
+    this.router.navigate(['/movies', movieId]);
   }
 
 }
