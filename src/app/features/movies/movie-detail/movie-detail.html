@@ -1,1 +1,161 @@
-<p>movie-detail works!</p>
+<main class="min-h-screen bg-slate-900 text-white">
+  <!-- Estado de carga -->
+  @if (loading()) {
+    <div class="flex items-center justify-center min-h-screen">
+      <p class="text-2xl">⏳ Cargando película...</p>
+    </div>
+  }
+
+  <!-- Contenido cuando carga -->
+  @if (!loading() && movie()) {
+    <!-- Backdrop con degradado -->
+    <div class="relative h-[400px] bg-slate-900">
+      <div class="absolute inset-0 bg-linear-to-b from-transparent via-slate-900/50 to-slate-900 z-10"></div>
+
+      <img
+        [src]="getImageUrl(movie()!.backdrop_path, 'w1280')"
+        [alt]="movie()!.title"
+        (load)="onBackdropLoad()"
+        [class.opacity-0]="!backdropLoaded()"
+        [class.opacity-40]="backdropLoaded()"
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+      />
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="max-w-6xl mx-auto px-8 -mt-32 relative z-10">
+      <!-- Botón volver -->
+      <button
+        (click)="goBack()"
+        class="mb-6 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors flex items-center gap-2"
+      >
+        ← Volver
+      </button>
+
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- Poster -->
+        <div class="flex-shrink-0">
+          <img
+            [src]="getImageUrl(movie()!.poster_path, 'w500')"
+            [alt]="movie()!.title"
+            class="w-full md:w-[300px] rounded-lg shadow-2xl"
+          />
+        </div>
+
+        <!-- Info -->
+        <div class="flex-1">
+          <!-- Título -->
+          <h1 class="text-4xl md:text-5xl font-bold mb-2">
+            {{ movie()!.title }}
+          </h1>
+
+          <!-- Tagline -->
+          @if (movie()!.tagline) {
+            <p class="text-xl text-slate-400 italic mb-4">
+              "{{ movie()!.tagline }}"
+            </p>
+          }
+
+          <!-- Rating y año -->
+          <div class="flex items-center gap-4 mb-6">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl">⭐</span>
+              <span class="text-2xl font-bold text-amber-400">
+                {{ movie()!.vote_average.toFixed(1) }}
+              </span>
+              <span class="text-slate-400">
+                ({{ movie()!.vote_count }} votos)
+              </span>
+            </div>
+
+            <span class="text-slate-400">•</span>
+
+            <span class="text-slate-300">
+              {{ movie()!.release_date }}
+            </span>
+
+            @if (movie()!.runtime) {
+              <span class="text-slate-400">•</span>
+              <span class="text-slate-300">
+                {{ movie()!.runtime }} min
+              </span>
+            }
+          </div>
+
+          <!-- Géneros -->
+          @if (movie()!.genres.length > 0) {
+            <div class="flex flex-wrap gap-2 mb-6">
+              @for (genre of movie()!.genres; track genre.id) {
+                <span class="px-3 py-1 bg-slate-800 rounded-full text-sm">
+                  {{ genre.name }}
+                </span>
+              }
+            </div>
+          }
+
+          <!-- Overview -->
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold mb-3">Sinopsis</h2>
+            <p class="text-slate-300 leading-relaxed">
+              {{ movie()!.overview }}
+            </p>
+          </div>
+
+          <!-- Info adicional -->
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            @if (movie()!.budget > 0) {
+              <div>
+                <span class="text-slate-400">Presupuesto:</span>
+                <span class="ml-2 text-white font-semibold">
+                  ${{ movie()!.budget.toLocaleString() }}
+                </span>
+              </div>
+            }
+
+            @if (movie()!.revenue > 0) {
+              <div>
+                <span class="text-slate-400">Recaudación:</span>
+                <span class="ml-2 text-white font-semibold">
+                  ${{ movie()!.revenue.toLocaleString() }}
+                </span>
+              </div>
+            }
+
+            @if (movie()!.status) {
+              <div>
+                <span class="text-slate-400">Estado:</span>
+                <span class="ml-2 text-white font-semibold">
+                  {{ movie()!.status }}
+                </span>
+              </div>
+            }
+
+            @if (movie()!.original_language) {
+              <div>
+                <span class="text-slate-400">Idioma:</span>
+                <span class="ml-2 text-white font-semibold">
+                  {{ movie()!.original_language.toUpperCase() }}
+                </span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Estado de error (si movie es null y no está cargando) -->
+  @if (!loading() && !movie()) {
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="text-center">
+        <p class="text-2xl mb-4">😕 No se encontró la película</p>
+        <button
+          (click)="goBack()"
+          class="px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+        >
+          ← Volver a la lista
+        </button>
+      </div>
+    </div>
+  }
+</main>

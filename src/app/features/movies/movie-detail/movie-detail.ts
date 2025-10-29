@@ -18,6 +18,9 @@ export class MovieDetailComponent implements OnInit {
 
   movie = signal<MovieDetail | null>(null);
   loading = signal<boolean>(true);
+  backdropLoaded = signal<boolean>(false);
+
+
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -59,5 +62,8 @@ getImageUrl(path: string | null, size: string = 'w500'): string {
   return `https://image.tmdb.org/t/p/${size}${path}`;
 }
 
+onBackdropLoad(): void {
+  this.backdropLoaded.set(true);
+}
 
 }
