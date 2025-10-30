@@ -32,9 +32,36 @@
     </ul>
   }
 
-  @if (!loading() && movies().length === 0) {
-    <p class="text-center text-xl text-slate-400">
-      😕 No se encontraron películas
+
+  <div #scrollTrigger class="h-px"></div>
+
+<!-- Estados de carga -->
+@if (loadingMore()) {
+  <div class="text-center py-12">
+    <div class="text-5xl animate-spin inline-block mb-4">🎬</div>
+    <p class="text-xl">Cargando más películas...</p>
+  </div>
+}
+
+@if (!loadingMore() && hasMore()) {
+  <div class="text-center py-12">
+    <button
+      (click)="loadMore()"
+      class="px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors text-lg font-semibold"
+    >
+      🎬 Cargar más películas
+    </button>
+    <p class="text-sm text-slate-400 mt-3">
+      Mostrando {{ movies().length }} de {{ totalPages() * 20 }} películas
     </p>
-  }
+  </div>
+}
+
+@if (!hasMore()) {
+  <div class="text-center py-12 text-slate-400">
+    <p class="text-2xl mb-2">✅ ¡Lo has visto todo!</p>
+    <p class="text-base">Has descubierto {{ movies().length }} películas populares</p>
+  </div>
+}
+
 </main>
