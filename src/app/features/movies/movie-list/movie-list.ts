@@ -29,6 +29,7 @@ export class MovieListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMovies();
+    this.setupIntersectionObserver();
   }
 
   loadMovies(): void {
@@ -83,7 +84,7 @@ export class MovieListComponent implements OnInit {
           }
         },
         {
-          rootMargin: '200px' 
+          rootMargin: '200px'
         }
       );
 
