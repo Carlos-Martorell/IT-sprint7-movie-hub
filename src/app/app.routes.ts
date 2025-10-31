@@ -17,6 +17,9 @@ export const routes: Routes = [
   {
     path: 'movies/:id',
     component: MovieDetailComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
-
 ];
