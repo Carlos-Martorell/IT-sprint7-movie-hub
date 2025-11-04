@@ -1,32 +1,32 @@
-<nav class="bg-slate-800 border-b border-slate-700">
+<nav class="bg-background border-b border-text/30">
   <div class="max-w-7xl mx-auto px-8 py-4">
     <div class="flex items-center justify-between">
       <!-- Logo -->
-      <a routerLink="/" class="text-2xl font-bold text-white hover:text-amber-400 transition-colors">
-        🎬 MovieHub
+      <a routerLink="/" class="link-hover group">
+        🎬 Black
       </a>
 
       <!-- Links -->
       <div class="flex items-center gap-6">
         <a
           routerLink="/"
-          routerLinkActive="text-amber-400"
+          routerLinkActive="text-secondary"
           [routerLinkActiveOptions]="{exact: true}"
-          class="text-white hover:text-amber-400 transition-colors font-medium"
+          class="link hover"
         >
           Inicio
         </a>
         <a
           routerLink="/movies"
-          routerLinkActive="text-amber-400"
-          class="text-white hover:text-amber-400 transition-colors font-medium"
+          routerLinkActive="text-secondary"
+          class="link-hover"
         >
           Películas
         </a>
         <a
           routerLink="/login"
-          routerLinkActive="text-amber-400"
-          class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-900 rounded-lg font-semibold transition-colors"
+          routerLinkActive="bg-secondary"
+          class="px-4 py-2 btn-primary"
         >
           Login
         </a>

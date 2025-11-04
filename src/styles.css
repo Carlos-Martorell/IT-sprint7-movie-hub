@@ -1,2 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+
 @import "tailwindcss";
+
+@theme {
+  --color-text: #040316;
+  --color-background: #e2bfa6;
+  --color-primary: #008f94;
+  --color-secondary: #8e8ebe;
+  --color-accent: #ffffff;
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-primary hover:bg-secondary text-accent font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg;
+  }
+
+  .link-hover {
+    @apply text-text hover:text-secondary transition-colors font-medium;
+  }
+
+  .card {
+    @apply bg-accent rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer;
+  }
+}
