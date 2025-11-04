@@ -19,6 +19,6 @@
   }
 
   .card {
-    @apply bg-accent rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer;
+    @apply bg-accent/50 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer;
   }
 }

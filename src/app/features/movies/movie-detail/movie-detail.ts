@@ -45,7 +45,6 @@ loadMovieDetail(id: number): void {
     error: (error) => {
       console.error('Error al cargar película:', error);
       this.loading.set(false);
-      // Si hay error (404, película no existe), volver a la lista
       this.router.navigate(['/movies']);
     }
   });
@@ -65,5 +64,21 @@ getImageUrl(path: string | null, size: string = 'w500'): string {
 onBackdropLoad(): void {
   this.backdropLoaded.set(true);
 }
+  getProductionCountries(): string {
+    if (!this.movie()) return '';
+    return this.movie()!
+      .production_countries
+      .slice(0, 2)
+      .map(c => c.name)
+      .join(', ');
+  }
 
+  getProductionCompanies(): string {
+    if (!this.movie()) return '';
+    return this.movie()!
+      .production_companies
+      .slice(0, 3)
+      .map(c => c.name)
+      .join(', ');
+  }
 }

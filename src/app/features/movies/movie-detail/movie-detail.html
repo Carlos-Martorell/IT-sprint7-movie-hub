@@ -1,4 +1,5 @@
-<main class="min-h-screen bg-slate-900 text-white">
+<main class="min-h-screen bg-background text-text pt-19">
+  
   <!-- Estado de carga -->
   @if (loading()) {
     <div class="flex items-center justify-center min-h-screen">
@@ -8,77 +9,76 @@
 
   <!-- Contenido cuando carga -->
   @if (!loading() && movie()) {
-    <!-- Backdrop con degradado -->
-    <div class="relative h-[400px] bg-slate-900">
-      <div class="absolute inset-0 bg-linear-to-b from-transparent via-slate-900/50 to-slate-900 z-10"></div>
-
+    
+    <!-- SECCIÓN 1: Header con backdrop difuminado -->
+    <div class="relative h-[400px] bg-text overflow-hidden">
+      <!-- Backdrop -->
       <img
         [src]="getImageUrl(movie()!.backdrop_path, 'w1280')"
         [alt]="movie()!.title"
         (load)="onBackdropLoad()"
         [class.opacity-0]="!backdropLoaded()"
-        [class.opacity-40]="backdropLoaded()"
-        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+        [class.opacity-50]="backdropLoaded()"
+        class="absolute inset-0 w-full h-full object-cover object-top  transition-opacity duration-700"
       />
+      <!-- Degradado fuerte para legibilidad -->
+      <div class="absolute inset-0 bg-linear-to-b from-text/15 via-text/5 to-background"></div>
+      
+      <!-- Título centrado encima -->
+      <div class="relative z-50 h-full flex flex-col items-center justify-center text-center px-8">
+        
+        <h1 class="text-4xl md:text-6xl font-bold text-accent drop-shadow-2xl mb-2">
+          {{ movie()!.title }}
+        </h1>
+        
+        @if (movie()!.tagline) {
+          <p class="text-xl md:text-2xl text-accent/90 italic drop-shadow-lg">
+            "{{ movie()!.tagline }}"
+          </p>
+        }
+      </div>
     </div>
 
-    <!-- Contenido principal -->
-    <div class="max-w-6xl mx-auto px-8 -mt-32 relative z-10">
-      <!-- Botón volver -->
-      <button
-        (click)="goBack()"
-        class="mb-6 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors flex items-center gap-2"
-      >
-        ← Volver
-      </button>
-
+  <div class="max-w-6xl mx-auto px-8 -mt-6 relative z-30">
+  
+    <button (click)="goBack()" class="btn-primary">
+    ← Volver
+  </button>
+</div>
+    <div class="max-w-6xl mx-auto px-8 py-12">
+      
       <div class="flex flex-col md:flex-row gap-8">
+        
         <!-- Poster -->
         <div class="flex-shrink-0">
           <img
             [src]="getImageUrl(movie()!.poster_path, 'w500')"
             [alt]="movie()!.title"
-            class="w-full md:w-[300px] rounded-lg shadow-2xl"
+            class="w-full md:w-[300px] rounded-lg shadow-2xl mx-auto"
           />
         </div>
 
         <!-- Info -->
         <div class="flex-1">
-          <!-- Título -->
-          <h1 class="text-4xl md:text-5xl font-bold mb-2">
-            {{ movie()!.title }}
-          </h1>
-
-          <!-- Tagline -->
-          @if (movie()!.tagline) {
-            <p class="text-xl text-slate-400 italic mb-4">
-              "{{ movie()!.tagline }}"
-            </p>
-          }
-
-          <!-- Rating y año -->
-          <div class="flex items-center gap-4 mb-6">
+          
+          <!-- Rating y metadatos -->
+          <div class="flex flex-wrap items-center gap-4 mb-6">
             <div class="flex items-center gap-2">
               <span class="text-2xl">⭐</span>
-              <span class="text-2xl font-bold text-amber-400">
+              <span class="text-2xl font-bold text-primary">
                 {{ movie()!.vote_average.toFixed(1) }}
               </span>
-              <span class="text-slate-400">
+              <span class="text-text/60 text-sm">
                 ({{ movie()!.vote_count }} votos)
               </span>
             </div>
 
-            <span class="text-slate-400">•</span>
-
-            <span class="text-slate-300">
-              {{ movie()!.release_date }}
-            </span>
+            <span class="text-text/40">•</span>
+            <span class="text-text/80">{{ movie()!.release_date }}</span>
 
             @if (movie()!.runtime) {
-              <span class="text-slate-400">•</span>
-              <span class="text-slate-300">
-                {{ movie()!.runtime }} min
-              </span>
+              <span class="text-text/40">•</span>
+              <span class="text-text/80">{{ movie()!.runtime }} min</span>
             }
           </div>
 
@@ -86,7 +86,7 @@
           @if (movie()!.genres.length > 0) {
             <div class="flex flex-wrap gap-2 mb-6">
               @for (genre of movie()!.genres; track genre.id) {
-                <span class="px-3 py-1 bg-slate-800 rounded-full text-sm">
+                <span class="px-3 py-1 bg-primary/20 text-primary border border-primary/30 rounded-full text-sm font-medium">
                   {{ genre.name }}
                 </span>
               }
@@ -94,68 +94,64 @@
           }
 
           <!-- Overview -->
-          <div class="mb-6">
-            <h2 class="text-2xl font-bold mb-3">Sinopsis</h2>
-            <p class="text-slate-300 leading-relaxed">
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-3 text-primary">Sinopsis</h2>
+            <p class="text-text/80 leading-relaxed text-lg">
               {{ movie()!.overview }}
             </p>
           </div>
 
-          <!-- Info adicional -->
-          <div class="grid grid-cols-2 gap-4 text-sm">
+          <!-- Info adicional en cards -->
+          <div class="grid grid-cols-2 gap-4">
             @if (movie()!.budget > 0) {
-              <div>
-                <span class="text-slate-400">Presupuesto:</span>
-                <span class="ml-2 text-white font-semibold">
+              <div class="bg-accent/10 p-4 rounded-lg border border-primary/20">
+                <p class="text-text/60 text-sm mb-1">Presupuesto</p>
+                <p class="text-text font-semibold text-lg">
                   ${{ movie()!.budget.toLocaleString() }}
-                </span>
+                </p>
               </div>
             }
 
             @if (movie()!.revenue > 0) {
-              <div>
-                <span class="text-slate-400">Recaudación:</span>
-                <span class="ml-2 text-white font-semibold">
+              <div class="bg-accent/10 p-4 rounded-lg border border-primary/20">
+                <p class="text-text/60 text-sm mb-1">Recaudación</p>
+                <p class="text-text font-semibold text-lg">
                   ${{ movie()!.revenue.toLocaleString() }}
-                </span>
+                </p>
               </div>
             }
 
-            @if (movie()!.status) {
-              <div>
-                <span class="text-slate-400">Estado:</span>
-                <span class="ml-2 text-white font-semibold">
-                  {{ movie()!.status }}
-                </span>
-              </div>
-            }
+            
+             @if (movie()!.production_countries.length > 0) {
+    <div class="bg-accent/10 p-4 rounded-lg border border-primary/20">
+      <p class="text-text/60 text-sm mb-1">Países</p>
+      <p class="text-text font-semibold">{{ getProductionCountries() }}</p>
+    </div>
+  }
 
-            @if (movie()!.original_language) {
-              <div>
-                <span class="text-slate-400">Idioma:</span>
-                <span class="ml-2 text-white font-semibold">
-                  {{ movie()!.original_language.toUpperCase() }}
-                </span>
-              </div>
-            }
+  @if (movie()!.production_companies.length > 0) {
+    <div class="bg-accent/10 p-4 rounded-lg border border-primary/20 ">
+      <p class="text-text/60 text-sm mb-1">Estudios</p>
+      <p class="text-text font-semibold">{{ getProductionCompanies() }}</p>
+    </div>
+  }
           </div>
+          
         </div>
       </div>
     </div>
   }
 
-  <!-- Estado de error (si movie es null y no está cargando) -->
+  <!-- Estado de error -->
   @if (!loading() && !movie()) {
     <div class="flex items-center justify-center min-h-screen">
       <div class="text-center">
         <p class="text-2xl mb-4">😕 No se encontró la película</p>
-        <button
-          (click)="goBack()"
-          class="px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
-        >
+        <button (click)="goBack()" class="btn-primary">
           ← Volver a la lista
         </button>
       </div>
     </div>
   }
+  
 </main>
