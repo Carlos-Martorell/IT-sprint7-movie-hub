@@ -1,4 +1,4 @@
-<nav class="bg-background/50 border-b border-text/30 text-xl fixed w-full z-50">
+<nav class="bg-background/80 border-b border-text/30 text-xl fixed w-full z-50">
   <div class="max-w-7xl mx-auto px-8 py-4">
     <div class="flex items-center justify-between ">
       <!-- Logo -->
@@ -11,7 +11,7 @@
       </a>
 
       <!-- Links -->
-      <div class="flex items-center gap-6">
+      <div class="flex items-center gap-2">
         @if (authService.isAuthenticated()) {
           <a routerLink="/movies" routerLinkActive="text-primary" class="link-hover">
             Películas
@@ -21,8 +21,8 @@
         <!-- Usuario logeado -->
         @if (authService.isAuthenticated()) {
           <div class="flex items-center gap-4">
-            <span class="text-text/80 text-sm">
-              {{ authService.currentUser()?.email }}
+            <span class="text-text/80 text-md">
+              Hola, {{ authService.currentUser()?.displayName || 'bienvenido' }}
             </span>
             <button (click)="logout()" class="btn-secondary">
               Cerrar sesión

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@core/services/auth';
+import { updateProfile } from 'firebase/auth';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +22,7 @@ private readonly router = inject(Router);
   errorMessage = signal<string>('');
   
   registerForm = this.fb.group({
+    username: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required]]
@@ -43,12 +46,12 @@ private readonly router = inject(Router);
       return;
     }
     
-    const { email, password } = this.registerForm.value;
+    const { username, email, password } = this.registerForm.value;
     
     this.loading.set(true);
     this.errorMessage.set('');
     
-    const result = await this.authService.register(email!, password!);
+    const result = await this.authService.register(email!, password!, username!);
     
     if (result.success) {
       // Registro exitoso → Auto-login y redirect

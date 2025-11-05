@@ -5,7 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   User,
-  onAuthStateChanged
+  onAuthStateChanged,
+  updateProfile
 } from 'firebase/auth'
 
 
@@ -13,7 +14,7 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
-   currentUser = signal<User | null>(null);
+  currentUser = signal<User | null>(null);
   isAuthenticated = signal<boolean>(false);
   private readonly auth = inject(Auth)
 
@@ -24,13 +25,16 @@ export class AuthService {
     });
   }
 
-  async register(email: string, password: string) {
+  async register( email: string, password: string, username: string) {
     try {
       const userCredential = await createUserWithEmailAndPassword(
-        this.auth, 
+        this.auth,
         email, 
         password
       );
+      await updateProfile(userCredential.user, {
+        displayName: username
+      })
       return { success: true, user: userCredential.user };
     } catch (error: any) {
       return { success: false, error: error.message };

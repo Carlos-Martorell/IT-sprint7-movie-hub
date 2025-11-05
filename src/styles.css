@@ -7,11 +7,19 @@
   --color-primary: #008f94;
   --color-secondary: #8e8ebe;
   --color-accent: #ffffff;
+
+  --fontFamily: {
+    /* 'sans': [ 'system-ui', 'sans-serif'],  */
+    'display': ['Sixtyfour', 'sans-serif']  
+}
 }
 
 @layer components {
   .btn-primary {
     @apply px-6 py-3 bg-primary hover:bg-secondary text-accent font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg;
+  }
+  .btn-secondary {
+    @apply px-2 py-1 text-lg bg-primary hover:bg-primary/80 text-accent font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg;
   }
 
   .link-hover {
@@ -21,4 +29,9 @@
   .card {
     @apply bg-accent/50 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer;
   }
+}
+
+input::placeholder,
+textarea::placeholder {
+  @apply text-text/40;
 }
