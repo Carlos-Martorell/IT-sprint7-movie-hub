@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@app/core/services/auth';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,13 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   private router = inject(Router);
-
-  goToMovies(): void {
-    this.router.navigate(['/movies']);
+  private authService = inject(AuthService);
+  
+  goToMovies() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/movies']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }
