@@ -12,20 +12,29 @@
 
       <!-- Links -->
       <div class="flex items-center gap-6">
-        <a
-          routerLink="/movies"
-          routerLinkActive="text-text"
-          class="link-hover"
-        >
-          Películas
-        </a>
-        <a
-          routerLink="/login"
-          routerLinkActive="bg-secondary"
-          class="px-4 py-2 btn-primary"
-        >
-          Login
-        </a>
+        @if (authService.isAuthenticated()) {
+          <a routerLink="/movies" routerLinkActive="text-primary" class="link-hover">
+            Películas
+          </a>
+        }
+        
+        <!-- Usuario logeado -->
+        @if (authService.isAuthenticated()) {
+          <div class="flex items-center gap-4">
+            <span class="text-text/80 text-sm">
+              {{ authService.currentUser()?.email }}
+            </span>
+            <button (click)="logout()" class="btn-secondary">
+              Cerrar sesión
+            </button>
+          </div>
+        } @else {
+          <!-- Usuario NO logeado -->
+          <a routerLink="/login" routerLinkActive="bg-secondary" class="btn-primary">
+            Login
+          </a>
+        }
+        
       </div>
     </div>
   </div>
