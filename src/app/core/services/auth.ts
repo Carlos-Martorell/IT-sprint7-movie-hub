@@ -1,6 +1,6 @@
-import { Injectable, signal } from '@angular/core';
-import { 
-  Auth, 
+import { inject, Injectable, signal } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import {  
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
   signOut,
@@ -15,8 +15,9 @@ import {
 export class AuthService {
    currentUser = signal<User | null>(null);
   isAuthenticated = signal<boolean>(false);
+  private readonly auth = inject(Auth)
 
-  constructor(private auth: Auth) {
+  constructor() {
     onAuthStateChanged(this.auth, (user) => {
       this.currentUser.set(user);
       this.isAuthenticated.set(!!user);
