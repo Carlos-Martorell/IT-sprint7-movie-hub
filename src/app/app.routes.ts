@@ -4,6 +4,7 @@ import { MovieDetailComponent } from '@ft/movies/movie-detail/movie-detail';
 import { HomeComponent } from './features/home/home/home';
 import { LoginComponent } from './features/auth/login/login';
 import { RegisterComponent } from './features/auth/register/register';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -17,18 +18,20 @@ export const routes: Routes = [
     component: LoginComponent 
 
    },
-   
+
   { path: 'register', 
     component: RegisterComponent 
   },
 
   {
     path: 'movies',
-    component: MovieListComponent
+    component: MovieListComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'movies/:id',
-    component: MovieDetailComponent
+    component: MovieDetailComponent,
+    canActivate: [authGuard]
   },
   {
     path: '**',
