@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { MovieResponse } from '../models/movie';
 import { MovieDetail } from '../models/movie-detail';
+import { MovieCredits } from '../models/movie-credits';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,20 @@ export class MovieService {
 
     return this.http.get<MovieDetail>(url, { params });
   }
+
+
+  getMovieCredits(id: number): Observable<MovieCredits> {
+    
+    const url = `${this.API_URL}/movie/${id}/credits`;
+    const params = {
+      api_key: this.API_KEY,
+      language: 'es-ES'
+    };
+
+    return this.http.get<MovieCredits>(url,{params})
+
+  }
+
+ 
 
 }

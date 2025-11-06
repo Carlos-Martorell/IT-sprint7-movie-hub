@@ -33,6 +33,64 @@
   @apply min-h-screen bg-gradient-to-b from-secondary/80 via-background to-primary/80 flex items-center justify-center pt-20 px-4;
 }
 
+/* scrollbar actores */
+/* 
+.overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-background);
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  height: 16px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: var(--color-text/60);
+  border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+} */
+/* ////////////// */
+
+/* Scrollbar más visible (estilo TMDB) */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 12px;  /* Más grueso que antes */
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: var(--color-background);
+  border-radius: 6px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 6px;
+  border: 2px solid var(--color-background);  /* Borde para separar */
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+/* Firefox */
+.overflow-x-auto {
+  scrollbar-width: auto;  /* 'auto' es más grueso que 'thin' */
+  scrollbar-color: var(--color-primary) var(--color-background);
+}
+
+/* Prevenir drag de imágenes */
+.overflow-x-auto img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
 }
 
 input::placeholder,

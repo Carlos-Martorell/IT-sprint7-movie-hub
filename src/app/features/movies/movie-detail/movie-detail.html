@@ -122,23 +122,71 @@
             }
 
             
-             @if (movie()!.production_countries.length > 0) {
-    <div class="bg-accent/10 p-4 rounded-lg border border-primary/20">
-      <p class="text-text/60 text-sm mb-1">Países</p>
-      <p class="text-text font-semibold">{{ getProductionCountries() }}</p>
-    </div>
-  }
+            @if (movie()!.production_countries.length > 0) {
+              <div class="bg-accent/10 p-4 rounded-lg border border-primary/20">
+                <p class="text-text/60 text-sm mb-1">Países</p>
+                <p class="text-text font-semibold">{{ getProductionCountries() }}</p>
+              </div>
+            }
 
-  @if (movie()!.production_companies.length > 0) {
-    <div class="bg-accent/10 p-4 rounded-lg border border-primary/20 ">
-      <p class="text-text/60 text-sm mb-1">Estudios</p>
-      <p class="text-text font-semibold">{{ getProductionCompanies() }}</p>
-    </div>
-  }
+            @if (movie()!.production_companies.length > 0) {
+              <div class="bg-accent/10 p-4 rounded-lg border border-primary/20 ">
+                <p class="text-text/60 text-sm mb-1">Estudios</p>
+                <p class="text-text font-semibold">{{ getProductionCompanies() }}</p>
+              </div>
+            }
           </div>
           
         </div>
       </div>
+      @if (actors()!.length > 0) {
+          <section class="mt-12">
+            <p class="text-text/60 text-sm mb-1">Reparto principal</p>
+             <div class="relative group">
+    
+              <!-- Botón izquierda -->
+              <button 
+                (click)="scrollActors('left')"
+                class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-primary/90 hover:bg-primary text-accent p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                aria-label="Anterior"
+              >
+                ←
+              </button>
+    
+            <div #actorsScroll class="overflow-x-auto pb-4">
+              <div class="flex gap-4">
+                @for (actor of actors(); track actor.id) {
+                  <div class="shrink-0 w-40">
+                     <div class="relative aspect-2/3 mb-3 rounded-lg overflow-hidden">
+                    @if (actor.profile_path) {
+                      <img 
+                      [src]="getImageUrl(actor.profile_path, 'w185')" 
+                      [alt]="actor.name" 
+                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      draggable="false">
+                    } @else {
+                      <img src="/public/images/no-actor.png" alt="actor.name" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                    }
+                  </div>
+
+                  <p class="font-semibold text-sm text-text line-clamp-2">{{actor.name}}</p>
+                  @if (actor.character) {}
+                  <p class=" text-sm text-text/75 line-clamp-2">{{actor.character}}</p>
+                  </div>
+                }
+              </div>
+            </div>
+                        <button 
+                (click)="scrollActors('right')"
+                class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-primary/90 hover:bg-primary text-accent p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                aria-label="Siguiente"
+              >
+                →
+              </button>
+            </div>
+          </section>
+      }
+
     </div>
   }
 
@@ -152,6 +200,7 @@
         </button>
       </div>
     </div>
+    
   }
   
 </main>
