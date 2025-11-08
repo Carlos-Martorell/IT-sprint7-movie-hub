@@ -140,8 +140,8 @@
         </div>
       </div>
       @if (actors()!.length > 0) {
-          <section class="mt-12 bg-accent/10 p-4 rounded-lg border border-primary/20">
-            <p class="text-text/60 text-sm mb-1">Reparto principal</p>
+         <section class="mt-12 bg-accent/10 p-4 rounded-lg border border-primary/40 shadow-xl">
+            <p class="text-2xl font-bold mb-3 text-primary text-center">Reparto principal</p>
              <div class="relative group">
     
               <!-- Botón izquierda -->
@@ -178,6 +178,50 @@
             </div>
                         <button 
                 (click)="scrollActors('right')"
+                class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-primary/90 hover:bg-primary text-accent p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                aria-label="Siguiente"
+              >
+                →
+              </button>
+            </div>
+          </section>
+      }
+      @if (similars()!.length > 0) {
+          <section class="mt-12 bg-accent/10 p-4 rounded-lg border border-primary/40 shadow-xl">
+            <p class="text-2xl font-bold mb-3 text-primary text-center">Películas similares</p>
+             <div class="relative group">
+    
+              <!-- Botón izquierda -->
+              <button 
+                (click)="scrollSimilars('left')"
+                class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-primary/90 hover:bg-primary text-accent p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                aria-label="Anterior"
+              >
+                ←
+              </button>
+    
+            <div #similarsScroll class="overflow-x-auto pb-4">
+              <div class="flex gap-4">
+                @for (similar of similars(); track similar.id) {
+                  <div class="shrink-0 w-40">
+                     <div class="relative aspect-2/3 mb-3 rounded-lg overflow-hidden">
+                    @if (similar.poster_path) {
+                      <img 
+                      [src]="getImageUrl(similar.poster_path, 'w185')" 
+                      [alt]="similar.title" 
+                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      draggable="false">
+                    }
+                  </div>
+                  <p class="font-semibold text-sm text-text line-clamp-2">{{similar.title}}</p>
+                  <p class=" text-sm text-text/75 line-clamp-2">📅 {{ similar.release_date }}</p>
+                  <p class="font-semibold text-sm text-text line-clamp-2">⭐ {{ similar.vote_average.toFixed(1) }}</p>
+                  </div>
+                }
+              </div>
+            </div>
+                        <button 
+                (click)="scrollSimilars('right')"
                 class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-primary/90 hover:bg-primary text-accent p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-label="Siguiente"
               >

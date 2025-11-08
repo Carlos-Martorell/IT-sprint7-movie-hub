@@ -6,6 +6,7 @@ import { MovieResponse } from '../models/movie';
 import { MovieDetail } from '../models/movie-detail';
 import { MovieCredits } from '../models/movie-credits';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,7 +48,19 @@ export class MovieService {
     return this.http.get<MovieCredits>(url,{params})
 
   }
+  
+  getMovieSimilars(id: number): Observable<MovieResponse> {
+    
+    const url = `${this.API_URL}/movie/${id}/similar`;
+    const params = {
+      api_key: this.API_KEY,
+      language: 'es-ES',
+      page: 1
+    };
 
+    return this.http.get<MovieResponse>(url,{params})
+
+  }
  
 
 }

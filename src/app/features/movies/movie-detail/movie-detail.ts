@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '@app/core/services/movies';
 import { MovieDetail } from '@app/core/models/movie-detail';
 import { Cast } from '@app/core/models/movie-credits';
+import { Movie } from '@app/core/models/movie';
 
 @Component({
   selector: 'app-movie-detail',
@@ -14,6 +15,7 @@ import { Cast } from '@app/core/models/movie-credits';
 export class MovieDetailComponent implements OnInit {
     
   @ViewChild('actorsScroll') actorsScroll?: ElementRef;
+  @ViewChild('similarsScroll') similarsScroll?: ElementRef;
   
  
 
@@ -25,6 +27,7 @@ export class MovieDetailComponent implements OnInit {
   loading = signal<boolean>(true);
   backdropLoaded = signal<boolean>(false);
   actors = signal<Cast[]>([]);
+  similars = signal<Movie[]>([]);
 
 
   ngOnInit(): void {
@@ -33,6 +36,7 @@ export class MovieDetailComponent implements OnInit {
     if (id) {
       this.loadMovieDetail(Number(id));
       this.loadMovieCredits(Number(id));
+      this.loadMovieSimilars(Number(id));
     } else {
       // Si no hay ID, volver a la lista
       this.router.navigate(['/movies']);
@@ -68,6 +72,17 @@ loadMovieCredits(id: number): void {
   });
 }
 
+loadMovieSimilars(id: number): void {
+  this.movieService.getMovieSimilars(id).subscribe({
+    next: (response) => {
+      this.similars.set(response.results);
+    },
+    error: (error) => {
+      console.error('Error al cargar pelicula:', error);
+    }
+  });
+}
+
 goBack(): void {
   this.router.navigate(['/movies']);
 }
@@ -82,6 +97,7 @@ getImageUrl(path: string | null, size: string = 'w500'): string {
 onBackdropLoad(): void {
   this.backdropLoaded.set(true);
 }
+
   getProductionCountries(): string {
     if (!this.movie()) return '';
     return this.movie()!
@@ -105,6 +121,18 @@ onBackdropLoad(): void {
     
     const scrollAmount = 500; // 2 tarjetas (160px cada una)
     const container = this.actorsScroll.nativeElement;
+    
+    if (direction === 'left') {
+      container.scrollLeft -= scrollAmount;
+    } else {
+      container.scrollLeft += scrollAmount;
+    }}
+
+ scrollSimilars(direction: 'left' | 'right'): void {
+    if (!this.similarsScroll) return;
+    
+    const scrollAmount = 500; // 2 tarjetas (160px cada una)
+    const container = this.similarsScroll.nativeElement;
     
     if (direction === 'left') {
       container.scrollLeft -= scrollAmount;
