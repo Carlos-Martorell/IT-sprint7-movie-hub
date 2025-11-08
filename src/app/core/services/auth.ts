@@ -25,6 +25,7 @@ export class AuthService {
     });
   }
 
+
   async register( email: string, password: string, username: string) {
     try {
       const userCredential = await createUserWithEmailAndPassword(

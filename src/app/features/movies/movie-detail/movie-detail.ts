@@ -1,6 +1,6 @@
 import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MovieService } from '@app/core/services/movies';
 import { MovieDetail } from '@app/core/models/movie-detail';
 import { Cast } from '@app/core/models/movie-credits';
@@ -8,7 +8,7 @@ import { Movie } from '@app/core/models/movie';
 
 @Component({
   selector: 'app-movie-detail',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './movie-detail.html',
   styleUrl: './movie-detail.css'
 })
@@ -31,9 +31,12 @@ export class MovieDetailComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+     this.route.params.subscribe(params => {
+    const id = params['id'];
+    
 
     if (id) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       this.loadMovieDetail(Number(id));
       this.loadMovieCredits(Number(id));
       this.loadMovieSimilars(Number(id));
@@ -41,7 +44,7 @@ export class MovieDetailComponent implements OnInit {
       // Si no hay ID, volver a la lista
       this.router.navigate(['/movies']);
     }
-  }
+  })}
 
 loadMovieDetail(id: number): void {
   this.loading.set(true);

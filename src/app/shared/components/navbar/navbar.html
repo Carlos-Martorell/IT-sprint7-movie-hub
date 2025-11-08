@@ -19,8 +19,8 @@
       </a>
 
          @if (authService.isAuthenticated()) {
-          <span class="hidden  md:flex text-text/80 font-display text-2xl font-extrabold">
-              Hola, {{ authService.currentUser()?.displayName || 'bienvenido' }}
+          <span class="hidden  md:flex text-text/80 font-display text-xl font-extrabold">
+               {{  authService.currentUser()?.displayName || 'Bienvenido' }}
             </span>
         
         }

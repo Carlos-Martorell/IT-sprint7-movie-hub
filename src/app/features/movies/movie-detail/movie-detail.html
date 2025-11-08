@@ -203,7 +203,7 @@
             <div #similarsScroll class="overflow-x-auto pb-4">
               <div class="flex gap-4">
                 @for (similar of similars(); track similar.id) {
-                  <div class="shrink-0 w-40">
+                  <a [routerLink]="['/movies', similar.id]" class="block shrink-0 w-40">
                      <div class="relative aspect-2/3 mb-3 rounded-lg overflow-hidden">
                     @if (similar.poster_path) {
                       <img 
@@ -216,7 +216,7 @@
                   <p class="font-semibold text-sm text-text line-clamp-2">{{similar.title}}</p>
                   <p class=" text-sm text-text/75 line-clamp-2">📅 {{ similar.release_date }}</p>
                   <p class="font-semibold text-sm text-text line-clamp-2">⭐ {{ similar.vote_average.toFixed(1) }}</p>
-                  </div>
+                </a>
                 }
               </div>
             </div>
