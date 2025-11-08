@@ -10,7 +10,12 @@
 
   --font-display: 'Sixtyfour', sans-serif;
   --font-display2: 'Anta', sans-serif;
+  --font-display3: 'Montserrat', sans-serif;
   
+}
+
+body {
+  font-family: var(--font-display3);  /* Anta como default */
 }
 
 @layer components {
