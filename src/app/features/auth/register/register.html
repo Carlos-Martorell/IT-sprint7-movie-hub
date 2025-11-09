@@ -9,7 +9,6 @@
     
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="bg-accent rounded-lg shadow-xl p-8">
       
-      <!-- Username -->
       <div class="mb-6">
         <label for="email" class="block text-text font-medium mb-2">
           Nombre de usuario
@@ -33,7 +32,7 @@
           </p>
         }
       </div>
-      <!-- Email -->
+
       <div class="mb-6">
         <label for="email" class="block text-text font-medium mb-2">
           Email
@@ -58,7 +57,6 @@
         }
       </div>
       
-      <!-- Password -->
       <div class="mb-6">
         <label for="password" class="block text-text font-medium mb-2">
           Contraseña
@@ -83,7 +81,6 @@
         }
       </div>
       
-      <!-- Confirm Password -->
       <div class="mb-6">
         <label for="confirmPassword" class="block text-text font-medium mb-2">
           Confirmar contraseña
@@ -102,7 +99,7 @@
           </p>
         }
         
-        <!-- Error de passwords no coinciden -->
+
         @if (registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched) {
           <p class="text-red-500 text-sm mt-1">
             Las contraseñas no coinciden

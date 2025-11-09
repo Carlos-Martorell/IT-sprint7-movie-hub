@@ -1,18 +1,18 @@
 <main class="auth-container">
   
-  <!-- Card centrada -->
+
   <div class="w-full max-w-md">
     
-    <!-- Header -->
+
     <div class="text-center mb-8">
       <h1 class="text-4xl font-bold text-text mb-2">🔐 Iniciar sesión</h1>
       <p class="text-text/70">Accede a tu cuenta de BlackLodge</p>
     </div>
     
-    <!-- Formulario -->
+
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="bg-accent rounded-lg shadow-xl p-8">
       
-      <!-- Email -->
+
       <div class="mb-6">
         <label for="email" class="block text-text font-medium mb-2">
           Email
@@ -25,7 +25,6 @@
           placeholder="tu@email.com"
         />
         
-        <!-- Error de validación -->
         @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
           <p class="text-red-500 text-sm mt-1">
             @if (loginForm.get('email')?.errors?.['required']) {
@@ -38,7 +37,6 @@
         }
       </div>
       
-      <!-- Password -->
       <div class="mb-6">
         <label for="password" class="block text-text font-medium mb-2">
           Contraseña
@@ -51,7 +49,6 @@
           placeholder="••••••••"
         />
         
-        <!-- Error de validación -->
         @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
           <p class="text-red-500 text-sm mt-1">
             @if (loginForm.get('password')?.errors?.['required']) {
@@ -64,14 +61,12 @@
         }
       </div>
       
-      <!-- Error general -->
       @if (errorMessage()) {
         <div class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
           {{ errorMessage() }}
         </div>
       }
       
-      <!-- Botón submit -->
       <button 
         type="submit" 
         [disabled]="loading()"
@@ -84,7 +79,6 @@
         }
       </button>
       
-      <!-- Link a register -->
       <div class="mt-6 text-center">
         <p class="text-text/70">
           ¿No tienes cuenta? 

@@ -10,7 +10,7 @@ import { AuthService } from '@app/core/services/auth';
   styleUrl: './navbar.css'
 })
 export class NavbarComponent {
-    authService = inject(AuthService);  // ← Inyectar servicio
+    authService = inject(AuthService); 
   private router = inject(Router);
   
   async logout() {

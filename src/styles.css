@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: var(--font-display3);  /* Anta como default */
+  font-family: var(--font-display3);  
 }
 
 @layer components {
@@ -61,7 +61,7 @@ body {
 
 /* Firefox */
 .overflow-x-auto {
-  scrollbar-width: auto;  /* 'auto' es más grueso que 'thin' */
+  scrollbar-width: auto;  
   scrollbar-color: var(--color-primary) var(--color-background);
 }
 

@@ -25,19 +25,19 @@ export class LoginComponent {
   });
 
   async onSubmit() {
-    // Validar formulario
+
     if (this.loginForm.invalid) {
       this.errorMessage.set('Por favor, completa todos los campos correctamente');
       return;
     }
-    // Obtener valores
+
     const { email, password } = this.loginForm.value;
-    // Activar loading
+
     this.loading.set(true);
     this.errorMessage.set('');
-    // Llamar al servicio
+
     const result = await this.authService.login(email!, password!);
-    // Manejar resultado
+
     if (result.success) {
       this.router.navigate(['/movies']);
     } else {

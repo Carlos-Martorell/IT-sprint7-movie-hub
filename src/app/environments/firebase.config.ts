@@ -1,9 +1,6 @@
 
 import { initializeApp } from "firebase/app";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 export const firebaseConfig = {
   apiKey: "AIzaSyCj0PFlBUroDYWBDgatfgkJj5_VmYvdOHQ",
   authDomain: "blacklodge-movies.firebaseapp.com",
