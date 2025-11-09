@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: var(--font-display3);  
+  font-family: var(--font-display3);  /* Anta como default */
 }
 
 @layer components {
@@ -53,6 +53,7 @@ body {
   background: var(--color-primary);
   border-radius: 6px;
   border: 2px solid var(--color-background);  
+}
 
 .overflow-x-auto::-webkit-scrollbar-thumb:hover {
   background: var(--color-secondary);
