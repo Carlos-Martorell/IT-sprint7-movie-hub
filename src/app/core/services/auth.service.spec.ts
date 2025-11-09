@@ -15,7 +15,7 @@ let service: AuthService;
 beforeEach(() => {
     TestBed.configureTestingModule({
         providers:[AuthService,
-            {  provide: Auth;
+            {  provide: Auth,
                useValue: mockAuth
             }
         ]
