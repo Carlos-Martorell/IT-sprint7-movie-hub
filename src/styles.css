@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: var(--font-display3);  /* Anta como default */
+  font-family: var(--font-display3);  
 }
 
 @layer components {
@@ -39,34 +39,9 @@ body {
 }
 
 /* scrollbar actores */
-/* 
-.overflow-x-auto {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) var(--color-background);
-}
 
 .overflow-x-auto::-webkit-scrollbar {
-  height: 16px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-track {
-  background: var(--color-text/60);
-  border-radius: 4px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: 4px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-thumb:hover {
-  background: var(--color-secondary);
-} */
-/* ////////////// */
-
-/* Scrollbar más visible (estilo TMDB) */
-.overflow-x-auto::-webkit-scrollbar {
-  height: 12px;  /* Más grueso que antes */
+  height: 12px; 
 }
 
 .overflow-x-auto::-webkit-scrollbar-track {
@@ -77,8 +52,7 @@ body {
 .overflow-x-auto::-webkit-scrollbar-thumb {
   background: var(--color-primary);
   border-radius: 6px;
-  border: 2px solid var(--color-background);  /* Borde para separar */
-}
+  border: 2px solid var(--color-background);  
 
 .overflow-x-auto::-webkit-scrollbar-thumb:hover {
   background: var(--color-secondary);
